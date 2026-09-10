@@ -1,0 +1,229 @@
+.pg-page {
+  display: grid;
+  gap: 20px;
+  color: #123633;
+}
+.pg-page-summary {
+  max-width: 780px;
+  margin: 0;
+  color: #52716e;
+  font-size: 14px;
+  line-height: 1.55;
+}
+.pg-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+.pg-metrics-four {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.pg-metric {
+  min-height: 136px;
+  padding: 18px;
+}
+.pg-metric p {
+  margin: 8px 0 3px;
+  font-size: 14px;
+}
+.pg-metric-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #e5f4f1;
+  color: #087f72;
+}
+.pg-metric-icon svg {
+  width: 18px;
+}
+.pg-metric-sub {
+  display: block;
+  margin-top: 5px;
+  color: #52716e;
+  font-size: 14px;
+  line-height: 1.35;
+}
+.pg-chart {
+  width: 100%;
+  min-height: 285px;
+  margin: 8px 0 16px;
+}
+.pg-note {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 15px 16px;
+  border: 1px solid #b9ddd7;
+  border-radius: 10px;
+  background: #f1faf8;
+  color: #285451;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.pg-note svg {
+  flex: 0 0 auto;
+  margin-top: 2px;
+  color: #087f72;
+}
+.pg-table-toolbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+}
+.pg-page .panel-head h2,
+.pg-guide-card h2,
+.pg-guide-limits h2 {
+  margin: 0;
+  color: #0a2d2b;
+  font-size: 1.05rem;
+}
+.pg-page .panel-head p {
+  margin: 5px 0 0;
+  font-size: 14px;
+}
+.pg-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.pg-search {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0 10px;
+  height: 38px;
+  border: 1px solid #bdd2ce;
+  border-radius: 7px;
+  background: #fff;
+  color: #52716e;
+}
+.pg-search input,
+.pg-controls select {
+  border: 0;
+  color: #123633;
+  font: inherit;
+  font-size: 14px;
+  background: transparent;
+  min-width: 0;
+}
+.pg-search:focus-within {
+  border-color: #087f72;
+  box-shadow: 0 0 0 3px rgb(8 127 114 / 18%);
+}
+.pg-search input:focus-visible,
+.pg-controls select:focus-visible {
+  outline: 2px solid #087f72;
+  outline-offset: 2px;
+}
+.pg-controls select {
+  height: 38px;
+  border: 1px solid #bdd2ce;
+  border-radius: 7px;
+  padding: 0 8px;
+  background: #fff;
+}
+.pg-pagination {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 20px;
+  font-size: 14px;
+  color: #52716e;
+}
+.pg-pagination .btn {
+  font-size: 14px;
+  padding: 7px 10px;
+}
+.pg-pagination .btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+.pg-export-note {
+  margin: 14px 20px 0;
+  color: #52716e;
+  font-size: 14px;
+  line-height: 1.45;
+}
+.pg-status-pago {
+  background: #def3e8;
+  color: #176542;
+}
+.pg-status-em-dia {
+  background: #e5f4f1;
+  color: #087f72;
+}
+.pg-status-vencido {
+  background: #fff0db;
+  color: #915c15;
+}
+.pg-status-em-recurso {
+  background: #e9ebfb;
+  color: #4557a1;
+}
+.pg-status-baixado {
+  background: #e9eeee;
+  color: #526966;
+}
+.pg-guide-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+.pg-guide-card {
+  padding: 18px;
+  min-height: 155px;
+}
+.pg-guide-card p {
+  margin: 10px 0 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.pg-guide-limits {
+  padding: 20px;
+}
+.pg-guide-limits ul {
+  margin: 12px 0 0;
+  padding-left: 20px;
+  color: #52716e;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.pg-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+@media (max-width: 780px) {
+  .pg-metrics,
+  .pg-metrics-four,
+  .pg-guide-grid {
+    grid-template-columns: 1fr;
+  }
+  .pg-table-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .pg-controls {
+    flex-wrap: wrap;
+  }
+  .pg-search {
+    flex: 1 1 190px;
+  }
+  .pg-page .table-wrap {
+    overflow-x: auto;
+  }
+  .pg-page .data-table {
+    min-width: 630px;
+  }
+  .pg-pagination {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+}
