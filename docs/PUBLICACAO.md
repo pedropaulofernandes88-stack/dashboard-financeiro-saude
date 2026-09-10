@@ -16,6 +16,6 @@ A versão atual é demonstrativa: utiliza dados fictícios, sem informações de
 
 **Código e instruções de uso:** [acesse o repositório do Pulso no GitHub](https://github.com/pedropaulofernandes88-stack/dashboard-financeiro-saude). O README explica como instalar e executar a ferramenta no computador.
 
-O repositório está privado neste momento; o download exige acesso concedido pelo mantenedor.
+O repositório é público e pode ser baixado por qualquer pessoa, respeitando a licença de uso gratuito não comercial.
 
 #GestãoEmSaúde #DadosEmSaúde #Glosas #GestãoFinanceira
