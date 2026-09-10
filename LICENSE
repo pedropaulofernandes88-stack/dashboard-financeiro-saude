@@ -1,0 +1,97 @@
+LICENÇA PULSO — USO GRATUITO NÃO COMERCIAL 1.0
+Identificador: LicenseRef-Pulso-NonCommercial-1.0
+
+Copyright (c) 2026, titulares dos direitos sobre o projeto Pulso.
+Projeto mantido por pedropaulofernandes88-stack:
+https://github.com/pedropaulofernandes88-stack/dashboard-financeiro-saude
+
+1. OBJETO E ALCANCE
+
+Esta licença aplica-se ao código, à documentação e aos dados demonstrativos
+originais do projeto Pulso disponibilizados com este arquivo, na medida dos
+direitos que seus titulares possam licenciar. O recebimento de uma cópia não
+transfere a titularidade desses direitos. Ao exercer as permissões concedidas
+abaixo, você concorda em observar as condições desta licença.
+
+2. PERMISSÕES GRATUITAS
+
+É permitido, sem cobrança de licença, acessar, baixar, executar, estudar,
+copiar, modificar e compartilhar o material licenciado exclusivamente para
+finalidades não comerciais, observadas as demais condições deste documento.
+São exemplos o uso pessoal, o ensino, a pesquisa sem finalidade comercial e
+projetos públicos ou comunitários sem exploração comercial.
+
+O compartilhamento de cópias, modificadas ou não, deve ser gratuito e conservar
+esta licença e os avisos de autoria e de direitos existentes. Modificações
+devem ser identificadas como tais. As partes do Pulso incluídas ou adaptadas
+em uma distribuição permanecem sujeitas a esta licença; não se pode conceder
+a terceiros direitos comerciais sobre essas partes.
+
+3. PROIBIÇÃO DE USO COMERCIAL
+
+Esta licença NÃO concede permissão para usar o material com a finalidade de
+obter vantagem comercial, receita ou remuneração, direta ou indireta. Isso
+inclui, entre outros:
+
+a) vender, revender, alugar ou cobrar pelo acesso, pelo download ou pelo uso;
+b) oferecer o Pulso, ou uma versão adaptada, como SaaS, hospedagem ou serviço
+   remunerado, por assinatura, publicidade, patrocínio comercial ou outra
+   forma de monetização;
+c) incorporar o material a um produto ou serviço comercial, inclusive em
+   pacotes de consultoria, implantação ou disponibilização remunerada;
+d) utilizar o material no funcionamento ou na gestão de uma atividade
+   comercial, inclusive em clínicas, hospitais, operadoras ou outras
+   organizações que o empreguem em sua operação comercial, mesmo sem
+   revendê-lo e mesmo que tenham obtido a cópia gratuitamente;
+e) disponibilizar o material gratuitamente como instrumento de promoção,
+   captação de clientes ou suporte a uma oferta comercial.
+
+A gratuidade do download e a natureza pública, privada, educacional,
+assistencial ou sem fins lucrativos de uma organização, por si sós, não
+afastam esta proibição quando a finalidade concreta do uso for comercial.
+
+Qualquer uso comercial depende de autorização expressa, prévia e por escrito
+dos titulares dos direitos aplicáveis, em instrumento separado. Esta cláusula
+não promete a concessão dessa autorização nem estabelece preço comercial.
+
+4. AVISOS, AUTORIA E COMPONENTES DE TERCEIROS
+
+Não é permitido remover avisos de direitos, atribuir a si a autoria do
+material original nem apresentar uma adaptação como versão oficial ou como
+produto endossado pelos mantenedores sem autorização.
+
+Dependências, bibliotecas, ícones e outros componentes de terceiros mantêm
+suas próprias licenças. Esta licença não altera, restringe ou substitui os
+direitos concedidos separadamente pelos respectivos titulares. Os avisos
+exigidos por essas licenças devem ser preservados na distribuição.
+
+5. LIMITES DA DEMONSTRAÇÃO E AUSÊNCIA DE GARANTIA
+
+O Pulso é fornecido no estado em que se encontra, com dados sintéticos e sem
+garantia de adequação a uma finalidade específica, disponibilidade, exatidão
+ou ausência de falhas, na medida permitida pela legislação aplicável.
+
+A licença não certifica resultados financeiros, conformidade regulatória ou
+aptidão para decisões assistenciais. Cabe ao usuário verificar os cálculos,
+os dados, as regras aplicáveis e a adequação antes de empregar o material em
+qualquer finalidade permitida. Os titulares não respondem por danos além
+das responsabilidades que não possam ser afastadas pela legislação aplicável.
+
+6. DESCUMPRIMENTO E DIREITOS LEGAIS
+
+O exercício de direitos fora destas condições não é autorizado por esta
+licença. Em caso de descumprimento, cessam as permissões aqui concedidas ao
+infrator, que deve interromper o uso e a distribuição não autorizados. Isso
+não prejudica direitos ou exceções assegurados por lei, nem autorizações
+independentes concedidas pelos titulares.
+
+7. NATUREZA DA LICENÇA
+
+Esta é uma licença específica de código disponível para uso gratuito não
+comercial. Ela não é uma licença de software livre ou open source segundo
+definições que exigem liberdade de uso comercial. "Gratuito" não significa
+ausência de condições, transferência de direitos ou autorização comercial.
+
+O texto integral deste arquivo rege o material ao qual se aplica. Resumos no
+README, na interface ou em publicações têm finalidade explicativa e não
+ampliam as permissões aqui concedidas.

@@ -6,9 +6,24 @@ A versão 2 acrescenta inteligência assistencial, contas detalhadas em itens, c
 
 **Demonstração funcional com dados sintéticos.** A Rede Horizonte, suas unidades, pagadores e contas são fictícios. Nenhuma informação de paciente é utilizada. A aplicação ainda não está integrada a um ERP, banco ou sistema de faturamento real.
 
+**Uso gratuito exclusivamente não comercial.** Consulte a [licença completa](LICENSE). A gratuidade não autoriza revenda, SaaS pago ou uso em operações comerciais, inclusive de prestadores privados de saúde.
+
+## Acessar o projeto
+
+[Repositório no GitHub](https://github.com/pedropaulofernandes88-stack/dashboard-financeiro-saude) · [Texto de apresentação da ferramenta](docs/PUBLICACAO.md)
+
+O repositório está privado neste momento: é necessário ter acesso concedido pelo proprietário para baixar ou clonar. O texto de apresentação está salvo para divulgação; nenhuma postagem em rede social foi feita.
+
 ## Executar
 
 Requer Node.js 22.12+ (recomendado: Node.js 24) e npm.
+
+Com acesso ao repositório, baixe o código ou execute:
+
+```bash
+git clone https://github.com/pedropaulofernandes88-stack/dashboard-financeiro-saude.git
+cd dashboard-financeiro-saude
+```
 
 ```bash
 npm ci
@@ -95,4 +110,15 @@ Inspirado na organização por perguntas de gestão e na separação entre métr
 
 ## Escopo da versão
 
-Versão demonstrativa privada, sem publicação em hospedagem externa. O build está pronto para servir como aplicação estática quando o destino de hospedagem for definido. A escolha de licença para distribuição futura permanece com o proprietário do repositório (`UNLICENSED`).
+Versão demonstrativa privada, sem publicação em hospedagem externa. O build está pronto para servir como aplicação estática quando o destino de hospedagem for definido, respeitada a licença.
+
+## Licença
+
+O material original do Pulso está sob a **Licença Pulso — Uso Gratuito Não Comercial 1.0** (`LicenseRef-Pulso-NonCommercial-1.0`). O texto integral está no arquivo [LICENSE](LICENSE); os metadados npm apontam para esse arquivo.
+
+- Permite baixar, executar, estudar, copiar, modificar e compartilhar gratuitamente para finalidades não comerciais, preservando a licença e os avisos de autoria.
+- Proíbe venda, revenda, monetização, SaaS pago, incorporação a ofertas comerciais e uso na operação de atividades comerciais, mesmo que o software tenha sido obtido sem custo.
+- Uso comercial exige autorização expressa e escrita dos titulares, em instrumento separado.
+- Bibliotecas e outros componentes de terceiros mantêm suas próprias licenças.
+
+É código disponível para uso não comercial; não é uma licença de software livre ou open source. A licença é específica deste projeto e não substitui uma análise jurídica do caso concreto.
