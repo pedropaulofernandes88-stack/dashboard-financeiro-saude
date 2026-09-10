@@ -29,7 +29,7 @@ import type {
 import { dateLabel, money, moneyCompact, monthLabel, percent } from "./format";
 import "./pages.css";
 
-type Page = "revenue" | "receivables" | "glosas" | "costs" | "guide";
+type Page = "revenue" | "receivables" | "costs" | "guide";
 
 interface Props {
   page: Page;
@@ -301,7 +301,7 @@ function ReceivablesPage({
         />
         <Metric
           icon={<ArrowUpRight />}
-          label="Em recurso"
+          label="Em disputa"
           value={money(dashboard.metrics.disputedCents)}
         />
       </div>
@@ -344,7 +344,7 @@ function ReceivablesPage({
                 <option>Todos</option>
                 <option>Em dia</option>
                 <option>Vencido</option>
-                <option>Em recurso</option>
+                <option>Em disputa</option>
               </select>
             </label>
           </div>
@@ -438,79 +438,6 @@ function PositionsTable({
   );
 }
 
-function GlosasPage({
-  dashboard,
-  onSelectInvoice,
-}: Pick<Props, "dashboard" | "onSelectInvoice">) {
-  const disputed = dashboard.positions.filter((item) => item.disputedCents > 0);
-  return (
-    <section className="pg-page">
-      <p className="pg-page-summary">
-        Acompanhe a origem das glosas, os valores disputados e os pagamentos
-        recuperados em caixa.
-      </p>
-      <div className="pg-metrics pg-metrics-four">
-        <Metric
-          icon={<ReceiptText />}
-          label="Glosado no período"
-          value={money(dashboard.metrics.glosaCents)}
-        />
-        <Metric
-          icon={<ShieldCheck />}
-          label="Taxa inicial da coorte"
-          value={percent(dashboard.metrics.glosaRatePct)}
-          sub="Glosas até a posição / contas faturadas no período."
-        />
-        <Metric
-          icon={<ArrowUpRight />}
-          label="Em recurso"
-          value={money(dashboard.metrics.disputedCents)}
-        />
-        <Metric
-          icon={<WalletCards />}
-          label="Recuperado em caixa"
-          value={money(dashboard.metrics.recoveredCents)}
-        />
-      </div>
-      <article className="panel">
-        <div className="panel-head">
-          <div>
-            <h2>Motivos de glosa</h2>
-            <p className="muted">Valores registrados nos eventos do período.</p>
-          </div>
-        </div>
-        <BucketView rows={dashboard.glosaReasons} label="Valor glosado" />
-      </article>
-      <article className="panel">
-        <div className="panel-head">
-          <div>
-            <h2>Posições em contestação</h2>
-            <p className="muted">
-              Contas que ainda têm parcela registrada em recurso.
-            </p>
-          </div>
-        </div>
-        {disputed.length ? (
-          <PositionsTable positions={disputed} onSelect={onSelectInvoice} />
-        ) : (
-          <Empty>
-            Não há posições em contestação para os filtros selecionados.
-          </Empty>
-        )}
-      </article>
-      <aside className="pg-note">
-        <ShieldCheck size={19} aria-hidden="true" />
-        <span>
-          <strong>Leitura correta:</strong> a glosa continua dentro do saldo
-          aberto enquanto estiver em disputa, portanto não deve ser somada
-          novamente. Recuperação em caixa registra pagamento; não equivale, por
-          si só, à reversão administrativa da glosa.
-        </span>
-      </aside>
-    </section>
-  );
-}
-
 function CostsPage({ dashboard }: Pick<Props, "dashboard">) {
   const unavailable = dashboard.metrics.costCents === null;
   return (
@@ -586,11 +513,11 @@ function GuidePage({ data }: Pick<Props, "data">) {
         />
         <GuideCard
           title="Em aberto e vencido"
-          text="Saldo de cada conta após pagamentos e baixas definitivas. Vencido considera a data de vencimento frente à data de posição; glosas em recurso permanecem dentro do aberto."
+          text="Saldo de cada conta após pagamentos e baixas definitivas. Vencido considera a data de vencimento frente à data de posição; glosas em disputa permanecem dentro do aberto."
         />
         <GuideCard
           title="Glosa e recurso"
-          text="Glosa é uma contestação financeira registrada por evento. Em recurso é a parcela da conta ainda disputada."
+          text="Glosa é uma parcela contestada do faturamento. Estar em disputa não comprova envio de recurso. A central separa preparação, análise, reversão, recebimento e baixa, com datas e protocolo."
         />
         <GuideCard
           title="Custos e margem"
@@ -598,15 +525,27 @@ function GuidePage({ data }: Pick<Props, "data">) {
         />
         <GuideCard
           title="Fontes e versão"
-          text={`Base demonstrativa sintética com ${data.invoices.length} contas, atualizada até ${dateLabel(data.snapshotDate)}. Modelo de dados v1.0; valores servem à demonstração de navegação e métricas.`}
+          text={`Base demonstrativa sintética com ${data.invoices.length} contas, atualizada até ${dateLabel(data.snapshotDate)}. Modelo v2.0 com extensão assistencial; valores servem à demonstração de navegação e métricas.`}
+        />
+        <GuideCard
+          title="Inteligência assistencial"
+          text="Ticket = faturamento / contas emitidas. Tempo até faturar = dias entre serviço e emissão. Documentação completa significa ausência de pendências no checklist na emissão, sem inferir qualidade clínica."
+        />
+        <GuideCard
+          title="Coortes e comparação"
+          text="A taxa inicial considera primeira glosa conhecida das contas faturadas no período. Coortes recentes têm menos tempo de observação. A comparação mensal usa o último mês completo e o anterior, com os mesmos filtros."
+        />
+        <GuideCard
+          title="Cenário de recuperação"
+          text="Percentuais escolhidos pelo usuário são aplicados separadamente ao saldo em discussão e ao revertido ainda sem caixa. O resultado é uma hipótese, não previsão, receita reconhecida ou probabilidade calculada."
         />
       </div>
       <article className="panel pg-guide-limits">
         <h2>Limites desta visão</h2>
         <ul>
           <li>
-            Não há dados de pacientes, diagnósticos ou procedimentos
-            individualizados.
+            Não há dados de pacientes ou diagnósticos. Os procedimentos e guias
+            são fictícios, com códigos internos que não correspondem à TUSS.
           </li>
           <li>
             Rateios, impostos, provisões e conciliações contábeis exigem regras
@@ -616,7 +555,38 @@ function GuidePage({ data }: Pick<Props, "data">) {
             Os resultados dependem da integridade dos eventos e das datas
             cadastradas na fonte.
           </li>
+          <li>
+            Prazos de recurso e resposta são parâmetros contratuais de exemplo.
+            A classificação de motivos é local; não é um benchmark da ANS. O
+            contrato público fictício e pagamentos particulares têm regras
+            próprias.
+          </li>
+          <li>
+            O checklist mostra a situação na emissão, sem atualizações
+            documentais posteriores. A extensão aceita uma ocorrência de glosa
+            por conta; recursos por item e reapresentações exigem alocação
+            explícita em integração futura.
+          </li>
         </ul>
+        <p className="muted">
+          Referências de modelagem:{" "}
+          <a
+            href="https://www.gov.br/ans/pt-br/assuntos/prestadores/fator-de-qualidade-1/obrigatoriedade-do-contrato-escrito-1/faturamento-e-pagamento-dos-servicos-prestados"
+            target="_blank"
+            rel="noreferrer"
+          >
+            ANS — faturamento e pagamento
+          </a>{" "}
+          e{" "}
+          <a
+            href="https://www.gov.br/ans/pt-br/assuntos/prestadores/padrao-para-troca-de-informacao-de-saude-suplementar-2013-tiss/codigos-da-tuss"
+            target="_blank"
+            rel="noreferrer"
+          >
+            terminologia TUSS
+          </a>
+          . O protótipo não implementa intercâmbio TISS.
+        </p>
       </article>
     </section>
   );
@@ -691,13 +661,6 @@ export function DetailPage(props: Props) {
     case "receivables":
       return (
         <ReceivablesPage
-          dashboard={props.dashboard}
-          onSelectInvoice={props.onSelectInvoice}
-        />
-      );
-    case "glosas":
-      return (
-        <GlosasPage
           dashboard={props.dashboard}
           onSelectInvoice={props.onSelectInvoice}
         />

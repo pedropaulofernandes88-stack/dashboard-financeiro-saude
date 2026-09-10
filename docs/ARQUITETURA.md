@@ -43,7 +43,19 @@ Na integração real, uma validação de entrada em tempo de execução deverá 
 
 ## Escopo dos alertas
 
-Os alertas derivam dos números disponíveis: saldo vencido, saldo em recurso, resultado negativo e metas. Não atribuem causas clínicas ou comerciais e não utilizam IA. Os limiares demonstrativos não são parâmetros setoriais ou limites oficiais.
+Os alertas derivam dos números disponíveis: saldo vencido, saldo em disputa, resultado negativo e metas. Não atribuem causas clínicas ou comerciais e não utilizam IA. Os limiares demonstrativos não são parâmetros setoriais ou limites oficiais.
+
+## Extensão assistencial da versão 2
+
+`HealthData` complementa `Dataset` por identidade de conta e evento de glosa. A fonte financeira continua responsável pelos pagamentos, reversões e baixas. `calculateHealth` mantém o mesmo corte temporal e reconcilia o valor glosado em discussão, liberado sem recebimento, recuperado e baixado. O validador exige cobertura da extensão e rejeita múltiplas glosas por conta enquanto não houver alocação explícita por caso.
+
+`GlosasPage` apresenta carteira acumulada e coorte de notificações do período com nomes diferentes. Filtros locais afetam somente a fila e sua exportação. Os estados de recurso dependem de submissão/protocolo; o status financeiro `Em disputa` não atesta que um recurso foi enviado.
+
+`IntelligencePage` reúne análises por especialidade e pagador e a inspeção de guias/itens. `compareLatestMonth` compara os dois últimos meses calendários completos, preservando unidade/pagador e exigindo cobertura do mês anterior. O início de cobertura de faturamento da demo é janeiro de 2026; um adaptador real deve fornecer esse metadado. Não há ajuste por sazonalidade ou dias úteis.
+
+`recoveryScenario` trata percentuais como hipóteses declaradas, com valores em centavos. Aplica as hipóteses separadamente aos saldos exclusivos em disputa e liberados sem caixa, sem incorporar perdas ou valores recuperados. Não produz lançamento financeiro nem previsão de prazo.
+
+Esta versão mantém execução no navegador e dados sintéticos. Envio de recursos, anexos, resposta de operadoras, gestão documental e autenticação não são simulados como ações persistentes. Ao integrar dados reais, essas ações devem possuir backend, autorização, trilha de auditoria e alocação por guia/item/caso.
 
 ## Referências de domínio
 

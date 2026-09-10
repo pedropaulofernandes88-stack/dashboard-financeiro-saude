@@ -1,0 +1,347 @@
+.intelligence-page {
+  min-width: 0;
+}
+.intel-intro {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 22px 24px;
+  background: #e8f4f0;
+  border: 1px solid #c9e3db;
+  border-radius: 12px;
+}
+.intel-intro h2 {
+  font-size: 19px;
+}
+.intel-intro p {
+  margin: 5px 0 0;
+  line-height: 1.5;
+  font-size: 14px;
+  color: #42625d;
+}
+.intel-intro-icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 44px;
+  height: 44px;
+  background: #fff;
+  border: 1px solid #cee3dc;
+  border-radius: 11px;
+  color: #087f72;
+}
+.intel-tag {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  font-size: 11px;
+  padding: 6px 9px;
+  border: 1px solid #c4ddd6;
+  border-radius: 6px;
+  color: #365d54;
+  background: #f6fbf9;
+}
+.intel-intro > .intel-tag {
+  margin-left: auto;
+}
+.intel-signals {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  padding: 0 24px 24px;
+  gap: 24px;
+}
+.intel-signals > div + div {
+  border-left: 1px solid #e0e9e6;
+  padding-left: 24px;
+}
+.intel-signal-number {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: #087f72;
+  margin-bottom: 10px;
+}
+.intel-signals h3 {
+  margin-bottom: 8px;
+}
+.intel-signals p {
+  font-size: 14px;
+  line-height: 1.65;
+  color: #4a6560;
+  margin-bottom: 12px;
+}
+.intel-signals small {
+  color: #526c66;
+  line-height: 1.5;
+  display: block;
+}
+.intel-two-columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 20px;
+}
+.intel-two-columns > *,
+.intel-simulation-grid > * {
+  min-width: 0;
+}
+.intel-comparison {
+  padding: 0 24px;
+}
+.intel-comparison-row {
+  padding: 20px 0;
+  border-bottom: 1px solid #e6edeb;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+.intel-comparison-row:last-child {
+  border: 0;
+}
+.intel-comparison-row > div:last-child {
+  text-align: right;
+}
+.intel-comparison-row strong {
+  font-size: 20px;
+  font-weight: 650;
+}
+.intel-comparison-row small {
+  display: block;
+  margin-top: 5px;
+  color: #59716b;
+  line-height: 1.45;
+}
+.intel-footnote {
+  margin: 0;
+  padding: 14px 24px 20px;
+  color: #576f69;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.intel-footnote svg {
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+.intel-chart {
+  width: 100%;
+  height: 255px;
+  padding: 0 10px;
+}
+.intel-details > summary {
+  padding: 14px 24px;
+  font-size: 13px;
+  color: #08786b;
+  cursor: pointer;
+}
+.intel-payers td small,
+.intel-accounts td small {
+  display: block;
+  line-height: 1.5;
+  margin-top: 4px;
+  color: #577069;
+  white-space: normal;
+}
+.intel-payers td,
+.intel-accounts td {
+  font-size: 13px;
+}
+.intel-payers td:first-child {
+  min-width: 175px;
+}
+.intel-simulation-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 40px;
+  padding: 0 24px 12px;
+  align-items: stretch;
+}
+.intel-sliders {
+  display: grid;
+  gap: 24px;
+  padding: 14px 0;
+}
+.intel-sliders label {
+  display: block;
+  font-size: 14px;
+  line-height: 1.4;
+}
+.intel-sliders label strong {
+  float: right;
+  color: #076b60;
+}
+.intel-sliders input {
+  display: block;
+  width: 100%;
+  margin: 16px 0 10px;
+  accent-color: #087f72;
+  cursor: pointer;
+}
+.intel-sliders small {
+  color: #5b746d;
+}
+.intel-scenario-result {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #edf7f3;
+  border: 1px solid #d0e6dd;
+  padding: 22px;
+  border-radius: 10px;
+  color: #244c42;
+}
+.intel-scenario-result > span {
+  font-size: 13px;
+}
+.intel-scenario-result > strong {
+  font-size: 32px;
+  letter-spacing: -0.7px;
+  margin: 8px 0;
+}
+.intel-scenario-result p {
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 3px 0 14px;
+}
+.intel-scenario-result small {
+  line-height: 1.5;
+}
+.intel-table-head {
+  flex-wrap: wrap;
+}
+.intel-controls {
+  flex-wrap: wrap;
+}
+.intel-controls input {
+  width: 205px;
+}
+.intel-controls select {
+  max-width: 220px;
+}
+.intel-accounts {
+  min-width: 850px;
+}
+.intel-pending {
+  background: #fff1d9;
+  color: #875312;
+}
+.intel-pending-text {
+  color: #875312;
+}
+.intel-empty {
+  padding: 22px 24px;
+  color: #58736b;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.health-account-detail {
+  margin: 0 0 24px;
+  padding: 18px;
+  background: #f1f8f5;
+  border: 1px solid #d4e7df;
+  border-radius: 10px;
+}
+.health-account-detail h3 {
+  margin-bottom: 14px;
+}
+.health-account-detail dl {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 0;
+}
+.health-account-detail dt {
+  color: #5d756d;
+  font-size: 12px;
+}
+.health-account-detail dd {
+  margin: 4px 0 0;
+  font-size: 14px;
+}
+.health-account-detail ul {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.health-account-detail li {
+  font-size: 12px;
+  padding: 6px 8px;
+  background: white;
+  border: 1px solid #d4e5de;
+  border-radius: 5px;
+}
+@media (max-width: 1200px) {
+  .intel-intro > .intel-tag {
+    display: none;
+  }
+  .intel-two-columns {
+    grid-template-columns: 1fr;
+  }
+  .intel-controls {
+    width: 100%;
+  }
+  .intel-controls .pg-search {
+    flex: 1;
+  }
+  .intel-controls input {
+    width: 100%;
+  }
+}
+@media (max-width: 700px) {
+  .intel-intro {
+    padding: 18px;
+    align-items: flex-start;
+  }
+  .intel-intro h2 {
+    font-size: 17px;
+  }
+  .intel-signals {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 0 18px 18px;
+  }
+  .intel-signals > div + div {
+    border-left: 0;
+    border-top: 1px solid #e0e9e6;
+    padding: 18px 0 0;
+  }
+  .intel-signal-number {
+    float: left;
+    margin: 1px 12px 0 0;
+  }
+  .intel-simulation-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 0 18px 12px;
+  }
+  .intel-comparison {
+    padding: 0 18px;
+  }
+  .intel-comparison-row strong {
+    font-size: 18px;
+  }
+  .intel-footnote {
+    padding: 14px 18px 18px;
+  }
+  .intel-reading .panel-head {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .intel-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .intel-controls select {
+    width: 100%;
+    max-width: none;
+  }
+  .intel-controls .pg-search {
+    flex: auto;
+  }
+  .health-account-detail dl {
+    grid-template-columns: 1fr;
+  }
+  .intel-intro-icon {
+    display: none;
+  }
+}

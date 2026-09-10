@@ -55,7 +55,7 @@ export type InvoiceStatus =
   | "Pago"
   | "Em dia"
   | "Vencido"
-  | "Em recurso"
+  | "Em disputa"
   | "Baixado";
 export interface InvoicePosition extends Invoice {
   unitName: string;

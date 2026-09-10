@@ -164,7 +164,7 @@ describe("motor financeiro", () => {
     expect(old.openCents).toBe(6_000);
     expect(dispute.openCents).toBe(12_000);
     expect(dispute.disputedCents).toBe(3_000);
-    expect(dispute.status).toBe("Em recurso");
+    expect(dispute.status).toBe("Em disputa");
   });
 
   it("mede prazo de pagamento para conta antiga quitada no mês e limita recurso ao saldo aberto", () => {

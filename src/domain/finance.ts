@@ -126,7 +126,7 @@ export function getInvoicePosition(
       : 0;
   let status: InvoicePosition["status"];
   if (openCents === 0) status = writtenOffCents > 0 ? "Baixado" : "Pago";
-  else if (disputedCents > 0) status = "Em recurso";
+  else if (disputedCents > 0) status = "Em disputa";
   else if (invoice.dueDate < asOf) status = "Vencido";
   else status = "Em dia";
   return {
@@ -254,7 +254,7 @@ function makeAlerts(metrics: Dashboard["metrics"]): AlertItem[] {
     alerts.push({
       id: "disputed",
       level: "warning",
-      title: "Glosas ainda em recurso",
+      title: "Glosas ainda em disputa",
       description:
         "Parte do valor glosado ainda não foi revertida nem baixada na data de corte.",
       page: "glosas",

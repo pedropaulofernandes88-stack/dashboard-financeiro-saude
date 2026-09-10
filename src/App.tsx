@@ -19,6 +19,7 @@ import {
   Building2,
   ListFilter,
   RotateCcw,
+  Stethoscope,
 } from "lucide-react";
 import {
   Area,
@@ -44,9 +45,15 @@ import {
 } from "./format";
 import { dashboardCsv, downloadCsv } from "./export";
 import { DetailPage } from "./DetailPages";
+import { healthDemo } from "./data/health-demo";
+import { calculateHealth, validateHealthData } from "./domain/health";
+import { IntelligencePage } from "./IntelligencePage";
+import { GlosasPage } from "./GlosasPage";
+import { healthCsv } from "./health-export";
 
 type Page =
   | "overview"
+  | "intelligence"
   | "revenue"
   | "receivables"
   | "glosas"
@@ -65,6 +72,13 @@ const pages: {
     icon: LayoutDashboard,
   },
   {
+    id: "intelligence",
+    label: "Inteligência assistencial",
+    subtitle:
+      "Receita por especialidade, qualidade do faturamento e cenários de recuperação.",
+    icon: Stethoscope,
+  },
+  {
     id: "revenue",
     label: "Faturamento e caixa",
     subtitle: "Quanto faturamos e quanto efetivamente recebemos?",
@@ -78,8 +92,9 @@ const pages: {
   },
   {
     id: "glosas",
-    label: "Glosas e recuperação",
-    subtitle: "Valores em discussão e recuperação de receita.",
+    label: "Central de glosas",
+    subtitle:
+      "Prazos, recursos e recuperação: do motivo original ao recebimento.",
     icon: ShieldAlert,
   },
   {
@@ -109,7 +124,10 @@ function pageFromHash(): Page {
   const id = window.location.hash.slice(1);
   return pages.find((page) => page.id === id)?.id ?? "overview";
 }
-const datasetErrors = validateDataset(demoData);
+const datasetErrors = [
+  ...validateDataset(demoData),
+  ...validateHealthData(demoData, healthDemo),
+];
 
 export default function App() {
   const [page, setPage] = useState<Page>(pageFromHash);
@@ -119,6 +137,10 @@ export default function App() {
   const [exportNotice, setExportNotice] = useState("");
   const dashboard = useMemo(
     () => calculateDashboard(demoData, filters),
+    [filters],
+  );
+  const healthAnalytics = useMemo(
+    () => calculateHealth(demoData, healthDemo, filters),
     [filters],
   );
   const current = pages.find((item) => item.id === page)!;
@@ -216,19 +238,21 @@ export default function App() {
         </div>
         <div className="nav-caption">GESTÃO FINANCEIRA</div>
         <nav aria-label="Navegação principal">
-          {pages.slice(0, 5).map((item) => (
-            <a
-              key={item.id}
-              href={`#${item.id}`}
-              className={`nav-item ${page === item.id ? "active" : ""}`}
-              aria-current={page === item.id ? "page" : undefined}
-              onClick={() => navigate(item.id)}
-            >
-              <item.icon size={19} />
-              <span>{item.label}</span>
-              {page === item.id && <span className="nav-active-mark" />}
-            </a>
-          ))}
+          {pages
+            .filter((item) => item.id !== "guide")
+            .map((item) => (
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                className={`nav-item ${page === item.id ? "active" : ""}`}
+                aria-current={page === item.id ? "page" : undefined}
+                onClick={() => navigate(item.id)}
+              >
+                <item.icon size={19} />
+                <span>{item.label}</span>
+                {page === item.id && <span className="nav-active-mark" />}
+              </a>
+            ))}
         </nav>
         <div className="sidebar-bottom">
           <a
@@ -288,7 +312,9 @@ export default function App() {
                 className="btn btn-secondary export-button"
                 onClick={() => {
                   downloadCsv(
-                    dashboardCsv(dashboard, filters, page),
+                    page === "intelligence" || page === "glosas"
+                      ? healthCsv(healthAnalytics, filters, page)
+                      : dashboardCsv(dashboard, filters, page),
                     `pulso-${page}-${filters.endMonth}.csv`,
                   );
                   setExportNotice(
@@ -397,6 +423,25 @@ export default function App() {
           )}
           {page === "overview" ? (
             <Overview dashboard={dashboard} navigate={navigate} />
+          ) : page === "intelligence" ? (
+            <IntelligencePage
+              analytics={healthAnalytics}
+              dashboard={dashboard}
+              data={demoData}
+              filters={filters}
+              onSelectInvoice={setSelectedId}
+              onSelectPayer={(id) => {
+                changeFilter("payerId", id);
+                navigate("receivables");
+              }}
+              onOpenGlosas={() => navigate("glosas")}
+            />
+          ) : page === "glosas" ? (
+            <GlosasPage
+              analytics={healthAnalytics}
+              filters={filters}
+              onSelectInvoice={setSelectedId}
+            />
           ) : (
             <DetailPage
               page={page}
@@ -466,7 +511,7 @@ function Metric({
       <div className="metric-note">
         {target
           ? `Meta do período: ${moneyCompact(target)}`
-          : label === "Em recurso"
+          : label === "Em disputa"
             ? "Incluído no saldo a receber"
             : "Posição no último dia do período"}
       </div>
@@ -511,7 +556,7 @@ function Overview({
           icon={Wallet}
         />
         <Metric
-          label="Em recurso"
+          label="Em disputa"
           value={m.disputedCents}
           detail="Glosas ainda em discussão"
           icon={ShieldAlert}
@@ -812,6 +857,9 @@ function InvoiceDialog({
   const events = demoData.events
     .filter((event) => event.invoiceId === invoice.id && event.date <= asOf)
     .sort((a, b) => a.date.localeCompare(b.date));
+  const healthAccount = healthDemo.accounts.find(
+    (account) => account.invoiceId === invoice.id,
+  );
   const names = {
     payment: "Pagamento recebido",
     glosa: "Glosa registrada",
@@ -878,6 +926,83 @@ function InvoiceDialog({
             <strong>{money(invoice.openCents)}</strong>
           </div>
         </div>
+        {healthAccount && (
+          <section
+            className="health-account-detail"
+            aria-label="Detalhes assistenciais da conta"
+          >
+            <h3>Informações para o faturamento</h3>
+            <dl>
+              <div>
+                <dt>Guia / tipo</dt>
+                <dd>
+                  {healthAccount.guideNumber} · {healthAccount.guideType}
+                </dd>
+              </div>
+              <div>
+                <dt>Especialidade</dt>
+                <dd>{healthAccount.specialty}</dd>
+              </div>
+              <div>
+                <dt>Procedimento / código interno</dt>
+                <dd>
+                  {healthAccount.procedure} · {healthAccount.internalCode}
+                </dd>
+              </div>
+              <div>
+                <dt>Autorização na emissão</dt>
+                <dd>{healthAccount.authorizationStatus}</dd>
+              </div>
+              <div>
+                <dt>Serviço realizado</dt>
+                <dd>{dateLabel(invoice.serviceDate)}</dd>
+              </div>
+              <div>
+                <dt>Tempo até faturar</dt>
+                <dd>{healthAccount.billingLagDays} dias</dd>
+              </div>
+            </dl>
+            <ul aria-label="Checklist na emissão">
+              {healthAccount.documents.map((document) => (
+                <li key={document.label}>
+                  {document.label}: <strong>{document.status}</strong>
+                </li>
+              ))}
+            </ul>
+            <details className="intel-details">
+              <summary>Composição da conta em itens</summary>
+              <div className="table-wrap">
+                <table className="data-table">
+                  <caption>
+                    Itens demonstrativos conciliados ao total da conta
+                  </caption>
+                  <thead>
+                    <tr>
+                      <th>Categoria</th>
+                      <th>Item</th>
+                      <th>Valor</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {healthAccount.items.map((item, index) => (
+                      <tr key={index}>
+                        <td>{item.kind}</td>
+                        <td>{item.label}</td>
+                        <td>{money(item.amountCents)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <th colSpan={2}>Total</th>
+                      <td>{money(invoice.amountCents)}</td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </details>
+          </section>
+        )}
         <h3>Histórico da conta</h3>
         <ol className="timeline">
           <li>
@@ -906,7 +1031,7 @@ function InvoiceDialog({
           ))}
         </ol>
         <p className="fine-print">
-          Glosas em recurso: {money(invoice.disputedCents)} · Baixas
+          Glosas em disputa: {money(invoice.disputedCents)} · Baixas
           definitivas: {money(invoice.writtenOffCents)}. Eventos posteriores à
           posição selecionada não entram nesta leitura.
         </p>

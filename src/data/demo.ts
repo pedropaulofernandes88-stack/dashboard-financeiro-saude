@@ -67,7 +67,8 @@ for (let monthIndex = 0; monthIndex < months.length; monthIndex += 1) {
         unitId: units[unitIndex].id,
         payerId: payers[payerIndex].id,
         service: services[(row + monthIndex) % services.length],
-        serviceDate: addDays(billedDate, -2),
+        // Varia o intervalo assistência→faturamento sem criar dados identificáveis.
+        serviceDate: addDays(billedDate, -(1 + ((sequence * 5) % 12))),
         billedDate,
         dueDate: addDays(billedDate, payerIndex === 3 ? 15 : 30),
         amountCents,
@@ -75,7 +76,7 @@ for (let monthIndex = 0; monthIndex < months.length; monthIndex += 1) {
       invoices.push(invoice);
       const glosaStep = Math.floor(sequence / 6);
       const glosa =
-        sequence % 6 === 0
+        payerIndex !== 3 && sequence % 6 === 0
           ? Math.round(amountCents * (0.12 + (glosaStep % 3) * 0.03))
           : 0;
       const writtenOff = glosa > 0 && sequence % 18 === 0 ? glosa : 0;

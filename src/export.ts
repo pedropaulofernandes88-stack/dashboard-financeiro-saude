@@ -47,7 +47,7 @@ export function dashboardCsv(
         "Pago (R$)",
         "Baixado (R$)",
         "Em aberto (R$)",
-        "Em recurso (R$)",
+        "Em disputa (R$)",
         "Dias de atraso",
         "Situação",
       ],
